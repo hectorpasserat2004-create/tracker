@@ -17,22 +17,23 @@
   --accent: #c8f07a; --accent-dim: rgba(200,240,122,0.12); --done-bg: rgba(200,240,122,0.08);
   --blue: #7eb8f7; --blue-dim: rgba(126,184,247,0.12); --red: #ff6b6b;
   --safe: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 .app { max-width: 430px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; }
- 
+
 /* TABS */
-.tabs { display: flex; padding: 0 16px; border-bottom: 0.5px solid var(--border); }
+.tabs { display: flex; padding: calc(var(--safe-top) + 8px) 16px 0; border-bottom: 0.5px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 10; }
 .tab { flex: 1; padding: 14px 0; font-size: 12px; font-weight: 500; color: var(--muted); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em; text-transform: uppercase; border-bottom: 2px solid transparent; transition: all 0.2s; margin-bottom: -0.5px; }
 .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 .tab.counters-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
 .tab.week-tab.active { color: var(--text); border-bottom-color: var(--text); }
 .page { display: none; flex-direction: column; }
 .page.active { display: flex; }
- 
+
 /* HEADER */
-header { padding: 40px 24px 16px; }
+header { padding: 24px 24px 16px; }
 .header-top { display: flex; align-items: flex-start; justify-content: space-between; }
 .day-name { font-family: 'DM Serif Display', serif; font-size: 40px; line-height: 1; color: var(--text); }
 .day-name em { font-style: italic; color: var(--accent); }
@@ -41,7 +42,7 @@ header { padding: 40px 24px 16px; }
 .nav-btn { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; }
 .nav-btn:hover { color: var(--text); }
 .nav-btn:disabled { opacity: 0.3; cursor: default; }
- 
+
 /* SCORE */
 .score-section { padding: 0 24px 20px; }
 .score-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
@@ -50,19 +51,19 @@ header { padding: 40px 24px 16px; }
 .progress-track { height: 4px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
 .score-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--muted); }
- 
+
 /* STATS */
 .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 0 24px 20px; }
 .stat-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 12px; text-align: center; }
 .stat-val { font-size: 20px; font-weight: 500; color: var(--text); }
 .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
- 
+
 /* STREAK */
 .streak-banner { margin: 0 24px 16px; background: var(--accent-dim); border: 0.5px solid rgba(200,240,122,0.2); border-radius: 16px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
 .streak-emoji { font-size: 24px; }
 .streak-text { font-size: 13px; color: var(--accent); font-weight: 500; }
 .streak-sub { font-size: 11px; color: var(--muted); }
- 
+
 /* HABITS */
 .habits-section { flex: 1; padding: 0 24px; }
 .section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
@@ -79,7 +80,7 @@ header { padding: 40px 24px 16px; }
 .habit-item.done .habit-name { opacity: 0.5; }
 .habit-pts-badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 20px; background: var(--surface2); color: var(--muted); flex-shrink: 0; }
 .habit-item.done .habit-pts-badge { background: var(--accent-dim); color: var(--accent); }
- 
+
 /* ADD FORM */
 .add-section { padding: 20px 24px; padding-bottom: calc(20px + var(--safe)); }
 .add-form { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 16px; }
@@ -91,22 +92,22 @@ header { padding: 40px 24px 16px; }
 .pts-sel { background: var(--surface2); border: 0.5px solid var(--border); border-radius: 12px; padding: 12px 8px; font-size: 14px; color: var(--text); font-family: 'DM Sans', sans-serif; outline: none; width: 70px; }
 .add-btn { background: var(--accent); border: none; border-radius: 12px; width: 44px; height: 44px; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #0a0a0a; font-weight: 700; transition: opacity 0.2s; }
 .add-btn:active { opacity: 0.8; }
- 
+
 /* DAY PICKER (mini, in add forms) */
 .day-picker { display: flex; gap: 5px; margin-top: 12px; }
 .day-pick { flex: 1; aspect-ratio: 1; border-radius: 9px; border: 0.5px solid var(--border); background: var(--surface2); color: var(--muted); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
 .day-pick.on { background: var(--accent); border-color: var(--accent); color: #0a0a0a; font-weight: 500; }
- 
+
 /* CHART */
 .chart-section { padding: 0 24px 20px; }
 .chart-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 16px; }
 .chart-header { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 .chart-wrap { position: relative; height: 120px; }
- 
+
 .empty { text-align: center; padding: 32px 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
- 
+
 /* ===== COMPTEURS ===== */
-.counters-header { padding: 40px 24px 20px; }
+.counters-header { padding: 24px 24px 20px; }
 .counters-header .day-name em { color: var(--blue); }
 .counter-list { display: flex; flex-direction: column; gap: 12px; padding: 0 24px; flex: 1; }
 .counter-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 16px 20px; }
@@ -140,9 +141,9 @@ header { padding: 40px 24px 16px; }
 .add-input-num { width: 90px; flex: none; }
 .add-btn-blue { background: var(--blue); border: none; border-radius: 12px; width: 44px; height: 44px; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #0a0a0a; font-weight: 700; transition: opacity 0.2s; }
 .add-btn-blue:active { opacity: 0.8; }
- 
+
 /* ===== SEMAINE (config) ===== */
-.week-header { padding: 40px 24px 16px; }
+.week-header { padding: 24px 24px 16px; }
 .week-header .day-name em { color: var(--text); font-style: italic; }
 .week-intro { font-size: 13px; color: var(--muted); padding: 0 24px 20px; line-height: 1.5; }
 .week-table-wrap { padding: 0 16px; flex: 1; overflow-x: auto; }
@@ -164,13 +165,13 @@ header { padding: 40px 24px 16px; }
 </head>
 <body>
 <div class="app">
- 
+
   <div class="tabs">
     <button class="tab active" onclick="switchTab('habits')">Aujourd'hui</button>
     <button class="tab week-tab" onclick="switchTab('week')">Semaine</button>
     <button class="tab counters-tab" onclick="switchTab('counters')">Compteurs</button>
   </div>
- 
+
   <!-- ===== PAGE AUJOURD'HUI ===== -->
   <div class="page active" id="page-habits">
     <header>
@@ -186,7 +187,7 @@ header { padding: 40px 24px 16px; }
         </div>
       </div>
     </header>
- 
+
     <div class="score-section">
       <div class="score-row">
         <span class="score-big" id="score-val">0</span>
@@ -195,30 +196,30 @@ header { padding: 40px 24px 16px; }
       <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       <div class="score-labels"><span id="pct-label">0% complété</span><span id="done-label">0 / 0 tâches</span></div>
     </div>
- 
+
     <div class="stats-row">
       <div class="stat-card"><div class="stat-val" id="streak-val">🔥 0</div><div class="stat-lbl">Série</div></div>
       <div class="stat-card"><div class="stat-val" id="best-val">0%</div><div class="stat-lbl">Record</div></div>
       <div class="stat-card"><div class="stat-val" id="total-days">0</div><div class="stat-lbl">Jours actifs</div></div>
     </div>
- 
+
     <div id="streak-banner" style="display:none" class="streak-banner">
       <span class="streak-emoji">🔥</span>
       <div><div class="streak-text" id="streak-msg"></div><div class="streak-sub">Continue comme ça !</div></div>
     </div>
- 
+
     <div class="habits-section">
       <div class="section-label" id="habits-day-label">Aujourd'hui</div>
       <div class="habit-list" id="habit-list"></div>
     </div>
- 
+
     <div class="chart-section" style="margin-top:20px">
       <div class="chart-box">
         <div class="chart-header">14 derniers jours — % complété</div>
         <div class="chart-wrap"><canvas id="chart" role="img" aria-label="Graphique 14 jours"></canvas></div>
       </div>
     </div>
- 
+
     <div class="add-section">
       <div class="add-form">
         <div class="add-form-label">Nouvelle habitude</div>
@@ -235,7 +236,7 @@ header { padding: 40px 24px 16px; }
       </div>
     </div>
   </div>
- 
+
   <!-- ===== PAGE SEMAINE ===== -->
   <div class="page" id="page-week">
     <div class="week-header">
@@ -261,7 +262,7 @@ header { padding: 40px 24px 16px; }
       </div>
     </div>
   </div>
- 
+
   <!-- ===== PAGE COMPTEURS ===== -->
   <div class="page" id="page-counters">
     <div class="counters-header">
@@ -283,9 +284,9 @@ header { padding: 40px 24px 16px; }
       </div>
     </div>
   </div>
- 
+
 </div>
- 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const DAYS_FR = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
@@ -294,14 +295,14 @@ const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','a
 // Ordre d'affichage semaine : Lun -> Dim. JS getDay(): 0=Dim..6=Sam
 const WEEK_ORDER = [1,2,3,4,5,6,0];
 const WEEK_LABELS = ['L','M','M','J','V','S','D'];
- 
+
 let state = loadState();
 let offset = 0;
 let chartInst = null;
 let currentTab = 'habits';
 let newDays = [1,2,3,4,5,6,0];   // jours sélectionnés dans le form "Aujourd'hui"
 let weekNewDays = [1,2,3,4,5,6,0]; // jours sélectionnés dans le form "Semaine"
- 
+
 function defaultState() {
   return {
     habits: [
@@ -320,7 +321,7 @@ function defaultState() {
     nextId: 6, nextCntId: 3
   };
 }
- 
+
 function loadState() {
   try {
     const s = JSON.parse(localStorage.getItem('mytracker_v4'));
@@ -337,11 +338,11 @@ function loadState() {
     return defaultState();
   } catch(e) { return defaultState(); }
 }
- 
+
 function save() {
   try { localStorage.setItem('mytracker_v4', JSON.stringify(state)); } catch(e) {}
 }
- 
+
 // ---- DATES ----
 function getKey(off = 0) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10); }
 function getDayOfWeek(off = 0) { const d = new Date(); d.setDate(d.getDate() + off); return d.getDay(); }
@@ -352,7 +353,7 @@ function formatDayName(off = 0) {
   const cut = full.length > 4 ? 4 : full.length - 1;
   return full.slice(0, cut) + '<em>' + full.slice(cut) + '</em>';
 }
- 
+
 // ---- TABS ----
 function switchTab(tab) {
   currentTab = tab;
@@ -365,7 +366,7 @@ function switchTab(tab) {
   document.getElementById('page-counters').classList.toggle('active', tab === 'counters');
   render();
 }
- 
+
 // ---- HABITS DU JOUR (filtrées par jour de semaine) ----
 function habitsForDay(off) {
   const dow = getDayOfWeek(off);
@@ -405,7 +406,7 @@ function getBestDay() {
 function getActiveDays() {
   return Object.keys(state.done).filter(k => (state.done[k] || []).length > 0).length;
 }
- 
+
 // ---- RENDER ----
 function render() {
   renderHeader();
@@ -413,7 +414,7 @@ function render() {
   else if (currentTab === 'week') renderWeek();
   else renderCounters();
 }
- 
+
 function renderHeader() {
   const dn = offset === 0 ? formatDayName(0) : offset === -1 ? '<em>Hier</em>' : formatDayName(offset);
   document.getElementById('day-name').innerHTML = dn;
@@ -425,12 +426,12 @@ function renderHeader() {
   renderDayPicker('new-day-picker', newDays, (d) => { toggleArr(newDays, d); renderDayPicker('new-day-picker', newDays); });
   renderDayPicker('week-day-picker', weekNewDays, (d) => { toggleArr(weekNewDays, d); renderDayPicker('week-day-picker', weekNewDays); });
 }
- 
+
 function toggleArr(arr, val) {
   const i = arr.indexOf(val);
   if (i === -1) arr.push(val); else arr.splice(i, 1);
 }
- 
+
 function renderDayPicker(elId, selectedDays, onClick) {
   const el = document.getElementById(elId);
   if (!el) return;
@@ -443,7 +444,7 @@ function renderDayPicker(elId, selectedDays, onClick) {
     });
   }
 }
- 
+
 function renderHabits() {
   const key = getKey(offset);
   const dayHabits = habitsForDay(offset);
@@ -451,27 +452,27 @@ function renderHabits() {
   const earned = earnedPts(offset);
   const pct = total > 0 ? Math.round(earned / total * 100) : 0;
   const done = state.done[key] || [];
- 
+
   document.getElementById('score-val').textContent = earned;
   document.getElementById('score-max').textContent = '/ ' + total + ' pts';
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('pct-label').textContent = pct + '% complété';
   document.getElementById('done-label').textContent = dayHabits.filter(h => done.includes(h.id)).length + ' / ' + dayHabits.length + ' tâches';
- 
+
   const streak = getStreak();
   document.getElementById('streak-val').textContent = '🔥 ' + streak;
   document.getElementById('best-val').textContent = getBestDay() + '%';
   document.getElementById('total-days').textContent = getActiveDays();
- 
+
   const banner = document.getElementById('streak-banner');
   if (streak >= 3 && offset === 0) {
     banner.style.display = 'flex';
     document.getElementById('streak-msg').textContent = streak + ' jours consécutifs à 100% !';
   } else { banner.style.display = 'none'; }
- 
+
   document.getElementById('habits-day-label').textContent =
     offset === 0 ? 'Aujourd\'hui' : (offset === -1 ? 'Hier' : formatDate(offset));
- 
+
   const list = document.getElementById('habit-list');
   if (!dayHabits.length) {
     list.innerHTML = '<div class="empty">Aucune habitude prévue ce jour.<br>Configure tes jours dans l\'onglet "Semaine".</div>';
@@ -491,7 +492,7 @@ function renderHabits() {
   }
   renderChart();
 }
- 
+
 function renderWeek() {
   const table = document.getElementById('week-table');
   const todayDow = getDayOfWeek(0);
@@ -500,7 +501,7 @@ function renderWeek() {
     head += `<th class="week-th-day${dow === todayDow ? ' is-today' : ''}">${WEEK_LABELS[i]}</th>`;
   });
   head += '<th style="width:24px"></th></tr>';
- 
+
   let rows = '';
   if (!state.habits.length) {
     rows = '<tr><td colspan="9" class="empty">Ajoute une habitude ci-dessous</td></tr>';
@@ -518,7 +519,7 @@ function renderWeek() {
   }
   table.innerHTML = head + rows;
 }
- 
+
 function renderCounters() {
   const key = getKey(offset);
   const counts = state.counts[key] || {};
@@ -550,7 +551,7 @@ function renderCounters() {
     </div>`;
   }).join('');
 }
- 
+
 // ---- ACTIONS HABITS ----
 function toggle(id) {
   const key = getKey(offset);
@@ -597,7 +598,7 @@ function changeDay(d) {
   if (d === 0) { offset = 0; } else { if (offset + d > 0) return; offset += d; }
   render();
 }
- 
+
 // ---- ACTIONS COMPTEURS ----
 function countUp(id) {
   const key = getKey(offset);
@@ -628,7 +629,7 @@ function deleteCounter(id) {
   state.counters = state.counters.filter(c => c.id !== id);
   save(); renderCounters();
 }
- 
+
 // ---- CHART ----
 function renderChart() {
   const labels = [], data = [], colors = [];
@@ -654,13 +655,12 @@ function renderChart() {
     }
   });
 }
- 
+
 document.getElementById('new-name').addEventListener('keydown', e => { if (e.key === 'Enter') addHabit(); });
 document.getElementById('week-new-name').addEventListener('keydown', e => { if (e.key === 'Enter') addHabitFromWeek(); });
 document.getElementById('cnt-name').addEventListener('keydown', e => { if (e.key === 'Enter') addCounter(); });
- 
+
 render();
 </script>
 </body>
 </html>
- 
